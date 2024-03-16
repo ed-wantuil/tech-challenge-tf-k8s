@@ -14,27 +14,21 @@ data "aws_ami" "eks_worker" {
 
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_version = "1.18"
-  subnets         = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
-  vpc_id          = "vpc-abcde012"
+  version         = "17.1.0"
+  cluster_name    = "eks-cluster"
+  cluster_version = "1.21"
+  subnets         = module.vpc.private_subnets
+
+  vpc_id = module.vpc.vpc_id
 
   node_groups = {
     eks_nodes = {
       desired_capacity = 2
-      max_capacity     = 2
+      max_capacity     = 3
       min_capacity     = 1
 
-      instance_type = "m4.large"
-      key_name      = "eks"
-
-      root_block_device_size = "50"
-
-      source_security_group_ids = ["sg-0123456abcde7890a"]
-
-      additional_tags = {
-        Environment = "production"
-        Name        = "eks-worker-node"
-      }
+      instance_type = "m5.large"
+      key_name      = "your-key-pair-name"
     }
   }
 }
