@@ -6,9 +6,9 @@ variable "eks_version" {
   default = "1.21"
 }
 
-variable "database_username" {}
-
-variable "database_password" {}
+#variable "database_username" {}
+#
+#variable "database_password" {}
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
