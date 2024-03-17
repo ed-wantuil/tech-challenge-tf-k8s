@@ -1,7 +1,7 @@
 resource "aws_vpc" "eks_vpc" {
   cidr_block = "10.0.0.0/16"
-  tags = {
-    Name = "eks-vpc"
+  tags       = {
+    Name                                = "eks-vpc"
     "kubernetes.io/cluster/eks-cluster" = "shared"
   }
 }
@@ -14,7 +14,7 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "private-${var.azs[count.index]}"
+    Name                                = "private-${var.azs[count.index]}"
     "kubernetes.io/cluster/eks-cluster" = "shared"
   }
 }
@@ -27,7 +27,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public-${var.azs[count.index]}"
+    Name                                = "public-${var.azs[count.index]}"
     "kubernetes.io/cluster/eks-cluster" = "shared"
   }
 }
@@ -46,8 +46,8 @@ resource "aws_eip" "nat" {
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.eks_vpc.id
-  tags = {
-    Name = "eks-igw"
+  tags   = {
+    Name                                = "eks-igw"
     "kubernetes.io/cluster/eks-cluster" = "shared"
   }
 }
