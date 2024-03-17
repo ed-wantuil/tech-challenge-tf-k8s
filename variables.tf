@@ -8,7 +8,7 @@ variable "eks_version" {
 
 variable "database_username" {}
 
-variable "master_password" {}
+variable "database_password" {}
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
