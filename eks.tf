@@ -1,22 +1,3 @@
-resource "aws_security_group" "eks_sg" {
-  name   = "eks-sg"
-  vpc_id = "vpc-0617283310e7606a6"
-
-  ingress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_eks_cluster" "eks_cluster" {
   name    = var.cluster_name
   version = var.eks_version
