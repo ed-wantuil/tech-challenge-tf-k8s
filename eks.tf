@@ -24,6 +24,7 @@ resource "aws_security_group" "eks_sg" {
 resource "aws_eks_cluster" "eks_cluster" {
   name    = var.cluster_name
   version = var.eks_version
+  role_arn = "arn:aws:iam::058264138215:role/LabRole"
 
   vpc_config {
     subnet_ids         = ["subnet-12345", "subnet-67890"]
