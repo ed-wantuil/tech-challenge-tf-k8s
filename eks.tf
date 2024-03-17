@@ -1,5 +1,5 @@
 data "aws_vpc" "existing_vpc" {
-  id = "vpc-123456"
+  id = "vpc-0617283310e7606a6"
 }
 
 resource "aws_security_group" "eks_sg" {
