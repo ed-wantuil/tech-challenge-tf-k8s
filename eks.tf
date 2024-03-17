@@ -8,3 +8,16 @@ resource "aws_eks_cluster" "eks_cluster" {
     security_group_ids = ["sg-0afbb6ab8e72f0925"]
   }
 }
+
+
+resource "aws_eks_fargate_profile" "fargate_profile" {
+  cluster_name           = aws_eks_cluster.eks_cluster.name
+  fargate_profile_name   = "fargate"
+  pod_execution_role_arn = "arn:aws:iam::058264138215:role/LabRole"
+
+  subnet_ids = aws_eks_cluster.eks_cluster.vpc_config[0].subnet_ids
+
+  selector {
+    namespace = "kube-system"
+  }
+}
