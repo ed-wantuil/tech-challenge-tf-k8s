@@ -1,34 +1,32 @@
-provider "aws" {
-  region = "us-east-1"
+data "aws_vpc" "existing_vpc" {
+  id = "vpc-123456"
 }
 
-data "aws_ami" "eks_worker" {
-  filter {
-    name   = "eks-techchallenge"
-    values = ["amazon-eks-node-v1.18.8-20200610"]
+resource "aws_security_group" "eks_sg" {
+  name = "eks-sg"
+  vpc_id = data.aws_vpc.existing_vpc.id
+
+  ingress {
+    from_port = 0
+    to_port   = 65535
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  most_recent = true
-  owners      = ["602401143452"] # Amazon
+  ingress {
+    from_port = 0
+    to_port   = 65535
+    protocol = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
-module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  version         = "17.1.0"
-  cluster_name    = "eks-cluster"
-  cluster_version = "1.21"
-  subnets         = module.vpc.private_subnets
+resource "aws_eks_cluster" "eks_cluster" {
+  name = var.cluster_name
+  version = var.eks_version
 
-  vpc_id = module.vpc.vpc_id
-
-  node_groups = {
-    eks_nodes = {
-      desired_capacity = 2
-      max_capacity     = 3
-      min_capacity     = 1
-
-      instance_type = "m5.large"
-      key_name      = "your-key-pair-name"
-    }
+  vpc_config {
+    subnet_ids         = ["subnet-12345", "subnet-67890"]
+    security_group_ids = [aws_security_group.eks_sg.id]
   }
 }
