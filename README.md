@@ -6,13 +6,13 @@ Este repositório é dedicado ao armazenamento e gerenciamento do CI/CD para a i
 
 A documentação principal do projeto está disponível em [Tech Challenge Backend](https://github.com/ed-wantuil/tech-challenge-backend).
 
-![API Gateway Architecture](./doc/api-eks.png)
+![API Gateway Architecture](./doc/aws-eks.png)
 
 ## Recursos AWS Provisionados via Terraform
 
-* **ECR:** Um serviço de registro de Docker que armazena e gerencia suas imagens de container de forma segura.
-* **EKS:** Um serviço gerenciado de Kubernetes que facilita a implantação e operação de aplicações em containers.
-* **Secrets Manager:** Gerencia e protege as credenciais usadas por aplicações e serviços na nuvem.
+- **ECR:** Um serviço de registro de Docker que armazena e gerencia suas imagens de container de forma segura.
+- **EKS:** Um serviço gerenciado de Kubernetes que facilita a implantação e operação de aplicações em containers.
+- **Secrets Manager:** Gerencia e protege as credenciais usadas por aplicações e serviços na nuvem.
 
 ## Fluxo de Trabalho (Git Flow)
 
