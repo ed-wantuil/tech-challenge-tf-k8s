@@ -1,4 +1,4 @@
-# Tech Challenge - API Gateway
+# Tech Challenge - Kubernetes
 
 ## Visão Geral
 
